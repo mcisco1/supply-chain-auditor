@@ -189,4 +189,4 @@ fi
 
 MIT
 
-# PLEASE NOTE, some areas of README are written by AI to speed things up for me. If you notice any issues, please reach out to e so I can fix in potentially newer releases
+# PLEASE NOTE, some areas of README are written by AI to speed things up for me. If you notice any issues, please reach out to me so I can fix in potentially newer releases
