@@ -1,15 +1,15 @@
-# IMAGE TEST for vulnerable folder
 
-
-<img width="974" height="509" alt="IMAGETEST" src="https://github.com/user-attachments/assets/df76e433-1123-4138-9c6e-eb36a758fa00" />
-<img width="974" height="509" alt="IMAGETEST" src="https://github.com/user-attachments/assets/df76e433-1123-4138-9c6e-eb36a758fa00" />
-
-
-# Supply Chain Dependency Auditor
+# Supply Chain Dependency Auditor MADE FOR PROJECT/TEST PURPOSES. Further improvements may or may not be made
 
 A production-grade security tool that scans Python and Node.js codebases for dependency vulnerabilities. It extracts all dependencies recursively, cross-references them against three major vulnerability databases (NVD, OSV, and GitHub Advisory), maps the full dependency tree, calculates risk scores, and produces an interactive HTML dashboard report. 
 
 # 2 TESTS WITH FOLDERS INCLUDED TO SEE HOW IT WORKS
+
+# TEST RESULTS FOR vulenerable-node-test included below:
+
+<img width="974" height="509" alt="IMAGETEST" src="https://github.com/user-attachments/assets/3928102e-7f1d-4d80-9922-d5c49c8f2204" />
+<img width="974" height="509" alt="IMAGETEST" src="https://github.com/user-attachments/assets/3928102e-7f1d-4d80-9922-d5c49c8f2204" />
+
 
 ---
 
