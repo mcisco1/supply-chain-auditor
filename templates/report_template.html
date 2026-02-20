@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supply Chain Dependency Audit Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-primary:#070b14;--bg-secondary:#0d1321;--bg-card:#111828;--bg-card-hover:#172036;
+  --border:#1e293b;--border-bright:#2d3f5e;
+  --text-primary:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#64748b;
+  --accent:#22d3a7;--accent-dim:rgba(34,211,167,.12);--accent-glow:rgba(34,211,167,.25);
+  --critical:#ef476f;--critical-dim:rgba(239,71,111,.12);
+  --high:#f77f00;--high-dim:rgba(247,127,0,.12);
+  --medium:#ffd166;--medium-dim:rgba(255,209,102,.12);
+  --low:#118ab2;--low-dim:rgba(17,138,178,.12);
+  --none:#4a5568;
+  --font-display:'Chakra Petch',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'Fira Code',monospace;
+  --radius:8px;--radius-lg:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.6;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 0%,rgba(34,211,167,.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 100%,rgba(17,138,178,.03) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+.wrapper{max-width:1380px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+header{padding:40px 0 20px;border-bottom:1px solid var(--border)}
+.header-inner{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#118ab2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:var(--bg-primary);font-family:var(--font-display)}
+h1{font-family:var(--font-display);font-size:1.65rem;font-weight:700;letter-spacing:0.5px;color:var(--text-primary)}
+.header-sub{font-size:.82rem;color:var(--text-muted);margin-top:2px}
+.header-meta{text-align:right;font-size:.78rem;color:var(--text-muted);line-height:1.8}
+.header-meta span{color:var(--text-secondary)}
+
+.section{padding:32px 0}
+.section-title{font-family:var(--font-display);font-size:1.1rem;font-weight:600;letter-spacing:0.4px;color:var(--text-primary);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.section-title::before{content:'';width:3px;height:20px;background:var(--accent);border-radius:2px}
+
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:28px}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:22px;position:relative;overflow:hidden;transition:border-color .2s}
+.kpi:hover{border-color:var(--border-bright)}
+.kpi-label{font-size:.72rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--text-muted);font-weight:500;margin-bottom:8px}
+.kpi-value{font-family:var(--font-display);font-size:2rem;font-weight:700;line-height:1}
+.kpi-sub{font-size:.75rem;color:var(--text-muted);margin-top:6px}
+.kpi-stripe{position:absolute;top:0;left:0;right:0;height:3px}
+.kpi--accent .kpi-value{color:var(--accent)}.kpi--accent .kpi-stripe{background:var(--accent)}
+.kpi--critical .kpi-value{color:var(--critical)}.kpi--critical .kpi-stripe{background:var(--critical)}
+.kpi--high .kpi-value{color:var(--high)}.kpi--high .kpi-stripe{background:var(--high)}
+.kpi--medium .kpi-value{color:var(--medium)}.kpi--medium .kpi-stripe{background:var(--medium)}
+.kpi--low .kpi-value{color:var(--low)}.kpi--low .kpi-stripe{background:var(--low)}
+.kpi--neutral .kpi-value{color:var(--text-secondary)}.kpi--neutral .kpi-stripe{background:var(--text-muted)}
+
+.risk-gauge{display:flex;align-items:center;gap:28px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:28px}
+.gauge-visual{flex-shrink:0}
+.gauge-info h3{font-family:var(--font-display);font-size:1.5rem;font-weight:700;margin-bottom:4px}
+.gauge-info p{color:var(--text-secondary);font-size:.88rem;max-width:500px;line-height:1.7}
+
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}
+@media(max-width:860px){.chart-row{grid-template-columns:1fr}}
+.chart-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px}
+.chart-card h3{font-family:var(--font-display);font-size:.88rem;font-weight:600;margin-bottom:16px;color:var(--text-secondary)}
+
+.severity-bars{display:flex;flex-direction:column;gap:10px}
+.sev-row{display:flex;align-items:center;gap:12px}
+.sev-label{width:70px;font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.sev-bar-track{flex:1;height:24px;background:var(--bg-secondary);border-radius:4px;overflow:hidden}
+.sev-bar-fill{height:100%;border-radius:4px;transition:width .8s ease}
+.sev-count{font-family:var(--font-mono);font-size:.82rem;width:36px;text-align:right;font-weight:500}
+
+.donut-wrap{display:flex;align-items:center;justify-content:center;gap:30px;min-height:200px}
+.donut-legend{display:flex;flex-direction:column;gap:8px}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-secondary)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+.tree-container{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:28px;overflow:hidden}
+.tree-container h3{font-family:var(--font-display);font-size:.88rem;font-weight:600;margin-bottom:14px;color:var(--text-secondary)}
+#dep-tree{width:100%;overflow-x:auto}
+#dep-tree svg{display:block;margin:0 auto}
+.tree-node circle{stroke-width:2px;cursor:pointer;transition:r .15s}
+.tree-node:hover circle{r:7}
+.tree-node text{font-family:var(--font-mono);font-size:11px;fill:var(--text-secondary)}
+.tree-link{fill:none;stroke:var(--border-bright);stroke-width:1.2px;opacity:.6}
+
+.table-wrap{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:28px}
+.table-toolbar{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.table-toolbar input{background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;padding:7px 14px;color:var(--text-primary);font-family:var(--font-body);font-size:.82rem;width:260px;outline:none;transition:border-color .2s}
+.table-toolbar input:focus{border-color:var(--accent)}
+.table-toolbar input::placeholder{color:var(--text-muted)}
+.filter-btn{background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;padding:6px 14px;color:var(--text-secondary);font-family:var(--font-body);font-size:.78rem;cursor:pointer;transition:all .15s}
+.filter-btn:hover,.filter-btn.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+
+table{width:100%;border-collapse:collapse}
+thead{background:var(--bg-secondary)}
+th{font-family:var(--font-display);font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);text-align:left;padding:12px 16px;cursor:pointer;user-select:none;white-space:nowrap;transition:color .15s}
+th:hover{color:var(--text-primary)}
+th .sort-arrow{margin-left:4px;opacity:.4;font-size:.7rem}
+th.sorted .sort-arrow{opacity:1;color:var(--accent)}
+td{padding:12px 16px;border-top:1px solid var(--border);font-size:.84rem;vertical-align:top}
+tr:hover td{background:var(--bg-card-hover)}
+.pkg-name{font-family:var(--font-mono);font-weight:500;font-size:.82rem;color:var(--accent)}
+.pkg-ver{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted)}
+.badge{display:inline-block;padding:2px 9px;border-radius:4px;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.badge--critical{background:var(--critical-dim);color:var(--critical)}
+.badge--high{background:var(--high-dim);color:var(--high)}
+.badge--medium{background:var(--medium-dim);color:var(--medium)}
+.badge--low{background:var(--low-dim);color:var(--low)}
+.badge--none{background:rgba(74,85,104,.15);color:var(--none)}
+.badge--outdated{background:rgba(247,127,0,.1);color:var(--high);margin-left:6px}
+.vuln-list{list-style:none;padding:0;margin:4px 0 0}
+.vuln-list li{font-size:.78rem;color:var(--text-secondary);padding:3px 0;display:flex;align-items:baseline;gap:6px}
+.vuln-id{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);white-space:nowrap}
+.vuln-src{font-size:.65rem;padding:1px 5px;background:var(--bg-secondary);border-radius:3px;color:var(--text-muted)}
+.score-pill{font-family:var(--font-mono);font-size:.8rem;font-weight:600;min-width:36px;display:inline-block;text-align:center}
+
+.vuln-detail-cards{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:28px}
+.vuln-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;border-left:3px solid var(--border)}
+.vuln-card--critical{border-left-color:var(--critical)}
+.vuln-card--high{border-left-color:var(--high)}
+.vuln-card--medium{border-left-color:var(--medium)}
+.vuln-card--low{border-left-color:var(--low)}
+.vuln-card-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.vuln-card-id{font-family:var(--font-mono);font-weight:600;font-size:.88rem}
+.vuln-card-pkg{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);margin-left:auto}
+.vuln-card-body{font-size:.84rem;color:var(--text-secondary);line-height:1.7;margin-bottom:10px}
+.vuln-card-meta{display:flex;gap:18px;flex-wrap:wrap;font-size:.75rem;color:var(--text-muted)}
+.vuln-card-meta span{display:flex;align-items:center;gap:4px}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+
+.recommendations{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:40px}
+.recommendations h3{font-family:var(--font-display);font-size:.92rem;font-weight:600;margin-bottom:16px}
+.rec-item{padding:12px 0;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:flex-start}
+.rec-item:last-child{border-bottom:none}
+.rec-priority{flex-shrink:0;width:8px;height:8px;border-radius:50%;margin-top:7px}
+.rec-text{font-size:.84rem;color:var(--text-secondary);line-height:1.7}
+.rec-text strong{color:var(--text-primary);font-weight:500}
+
+footer{padding:24px 0;border-top:1px solid var(--border);text-align:center;font-size:.75rem;color:var(--text-muted)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{animation:fadeUp .45s ease both}
+.d1{animation-delay:.05s}.d2{animation-delay:.1s}.d3{animation-delay:.15s}.d4{animation-delay:.2s}.d5{animation-delay:.25s}.d6{animation-delay:.3s}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <header class="animate-in">
+    <div class="header-inner">
+      <div>
+        <div class="brand">
+          <div class="brand-icon">SC</div>
+          <div>
+            <h1>Supply Chain Audit Report</h1>
+            <div class="header-sub">Dependency Risk Analysis</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-meta" id="headerMeta"></div>
+    </div>
+  </header>
+
+  <section class="section animate-in d1">
+    <div class="section-title">Executive Summary</div>
+    <div id="riskGauge" class="risk-gauge"></div>
+    <div id="kpiRow" class="kpi-row"></div>
+  </section>
+
+  <section class="section animate-in d2">
+    <div class="section-title">Vulnerability Breakdown</div>
+    <div class="chart-row">
+      <div class="chart-card"><h3>Severity Distribution</h3><div id="sevBars" class="severity-bars"></div></div>
+      <div class="chart-card"><h3>Composition Overview</h3><div id="donutChart" class="donut-wrap"></div></div>
+    </div>
+  </section>
+
+  <section class="section animate-in d3">
+    <div class="section-title">Dependency Tree</div>
+    <div class="tree-container"><h3>Package Dependency Graph</h3><div id="dep-tree"></div></div>
+  </section>
+
+  <section class="section animate-in d4">
+    <div class="section-title">Package Inventory</div>
+    <div class="table-wrap">
+      <div class="table-toolbar">
+        <input type="text" id="tableSearch" placeholder="Filter packages...">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="vulnerable">Vulnerable</button>
+        <button class="filter-btn" data-filter="outdated">Outdated</button>
+        <button class="filter-btn" data-filter="critical">Critical</button>
+        <button class="filter-btn" data-filter="high">High</button>
+      </div>
+      <div style="overflow-x:auto"><table><thead id="tableHead"></thead><tbody id="tableBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="section animate-in d5" id="vulnDetailSection">
+    <div class="section-title">Vulnerability Details</div>
+    <div id="vulnCards" class="vuln-detail-cards"></div>
+  </section>
+
+  <section class="section animate-in d6">
+    <div class="section-title">Recommendations</div>
+    <div id="recBox" class="recommendations"></div>
+  </section>
+
+  <footer>Supply Chain Dependency Auditor &mdash; Generated <span id="footerTime"></span></footer>
+</div>
+
+<script>
+const DATA = /*__SCAN_DATA__*/;
+
+(function(){
+  const D = DATA;
+
+  document.getElementById('headerMeta').innerHTML =
+    `<div>Target: <span>${escHtml(D.target_path)}</span></div>` +
+    `<div>Ecosystems: <span>${D.ecosystems.join(', ') || 'N/A'}</span></div>` +
+    `<div>Generated: <span>${D.generated_at || ''}</span></div>` +
+    `<div>Duration: <span>${D.scan_duration}s</span></div>`;
+  document.getElementById('footerTime').textContent = D.generated_at || '';
+
+  renderRiskGauge(D);
+  renderKPIs(D);
+  renderSeverityBars(D);
+  renderDonut(D);
+  renderTree(D);
+  renderTable(D);
+  renderVulnCards(D);
+  renderRecommendations(D);
+})();
+
+function escHtml(s){
+  const d=document.createElement('div');d.textContent=s||'';return d.innerHTML;
+}
+
+function severityColor(s){
+  const m={critical:'var(--critical)',high:'var(--high)',medium:'var(--medium)',low:'var(--low)'};
+  return m[s]||'var(--none)';
+}
+
+function renderRiskGauge(D){
+  const el=document.getElementById('riskGauge');
+  const score=D.overall_risk_score;
+  const level=D.overall_risk_level;
+  const color=severityColor(level);
+  const pct=score*10;
+  const desc={critical:'Immediate remediation required. Critical vulnerabilities detected in the dependency chain.',
+    high:'Significant risk present. Multiple high-severity issues found that should be addressed promptly.',
+    medium:'Moderate risk level. Some known issues exist that should be reviewed during the next maintenance cycle.',
+    low:'Low risk posture. Minor findings detected, mostly informational.',
+    none:'Clean scan. No significant vulnerabilities or risks identified in the current dependency set.'}[level]||'Analysis complete.';
+
+  const size=110,stroke=10,r=(size-stroke)/2,circ=2*Math.PI*r;
+  el.innerHTML=`<div class="gauge-visual">
+    <svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+      <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--border)" stroke-width="${stroke}"/>
+      <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}"
+        stroke-dasharray="${circ}" stroke-dashoffset="${circ-(circ*pct/100)}"
+        stroke-linecap="round" transform="rotate(-90 ${size/2} ${size/2})" style="transition:stroke-dashoffset 1s ease"/>
+      <text x="${size/2}" y="${size/2+2}" text-anchor="middle" dominant-baseline="middle"
+        font-family="var(--font-display)" font-size="28" font-weight="700" fill="${color}">${score}</text>
+      <text x="${size/2}" y="${size/2+18}" text-anchor="middle" font-family="var(--font-body)"
+        font-size="9" fill="var(--text-muted)">/10</text>
+    </svg></div>
+    <div class="gauge-info"><h3 style="color:${color}">${level.charAt(0).toUpperCase()+level.slice(1)} Risk</h3><p>${desc}</p></div>`;
+}
+
+function renderKPIs(D){
+  const el=document.getElementById('kpiRow');
+  const kpis=[
+    {label:'Total Dependencies',value:D.total_dependencies,sub:`${D.direct_dependencies} direct / ${D.transitive_dependencies} transitive`,cls:'neutral'},
+    {label:'Vulnerabilities',value:D.total_vulnerabilities,sub:'across all packages',cls:D.total_vulnerabilities>0?'critical':'accent'},
+    {label:'Critical',value:D.critical_count,cls:D.critical_count>0?'critical':'neutral'},
+    {label:'High',value:D.high_count,cls:D.high_count>0?'high':'neutral'},
+    {label:'Medium',value:D.medium_count,cls:D.medium_count>0?'medium':'neutral'},
+    {label:'Outdated',value:D.outdated_count,sub:'packages behind latest',cls:D.outdated_count>0?'high':'accent'}
+  ];
+  el.innerHTML=kpis.map(k=>`<div class="kpi kpi--${k.cls}"><div class="kpi-stripe"></div><div class="kpi-label">${k.label}</div><div class="kpi-value">${k.value}</div>${k.sub?`<div class="kpi-sub">${k.sub}</div>`:''}</div>`).join('');
+}
+
+function renderSeverityBars(D){
+  const el=document.getElementById('sevBars');
+  const total=Math.max(D.total_vulnerabilities,1);
+  const items=[
+    {label:'Critical',count:D.critical_count,color:'var(--critical)'},
+    {label:'High',count:D.high_count,color:'var(--high)'},
+    {label:'Medium',count:D.medium_count,color:'var(--medium)'},
+    {label:'Low',count:D.low_count,color:'var(--low)'}
+  ];
+  el.innerHTML=items.map(i=>{
+    const pct=Math.max((i.count/total)*100,i.count>0?4:0);
+    return `<div class="sev-row"><span class="sev-label" style="color:${i.color}">${i.label}</span><div class="sev-bar-track"><div class="sev-bar-fill" style="width:${pct}%;background:${i.color}"></div></div><span class="sev-count" style="color:${i.color}">${i.count}</span></div>`;
+  }).join('');
+}
+
+function renderDonut(D){
+  const el=document.getElementById('donutChart');
+  const vuln=D.audits.filter(a=>a.vulnerabilities.length>0).length;
+  const outdated=D.audits.filter(a=>a.package.is_outdated&&a.vulnerabilities.length===0).length;
+  const clean=D.audits.length-vuln-outdated;
+  const slices=[
+    {label:'Vulnerable',value:vuln,color:'var(--critical)'},
+    {label:'Outdated Only',value:outdated,color:'var(--high)'},
+    {label:'Clean',value:clean,color:'var(--accent)'}
+  ].filter(s=>s.value>0);
+
+  const total=slices.reduce((s,x)=>s+x.value,0)||1;
+  const size=170,cx=size/2,cy=size/2,r=60,sw=28;
+  let cumAngle=-Math.PI/2;
+
+  let arcs='';
+  slices.forEach(s=>{
+    const angle=(s.value/total)*2*Math.PI;
+    const gap=slices.length>1?0.04:0;
+    const startA=cumAngle+gap/2;
+    const endA=cumAngle+angle-gap/2;
+    const x1=cx+r*Math.cos(startA),y1=cy+r*Math.sin(startA);
+    const x2=cx+r*Math.cos(endA),y2=cy+r*Math.sin(endA);
+    const large=angle>Math.PI?1:0;
+    arcs+=`<path d="M${x1},${y1} A${r},${r} 0 ${large} 1 ${x2},${y2}" fill="none" stroke="${s.color}" stroke-width="${sw}" stroke-linecap="butt"/>`;
+    cumAngle+=angle;
+  });
+
+  const legend=slices.map(s=>`<div class="legend-item"><div class="legend-dot" style="background:${s.color}"></div>${s.label}: ${s.value}</div>`).join('');
+  el.innerHTML=`<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${arcs}<text x="${cx}" y="${cy-4}" text-anchor="middle" font-family="var(--font-display)" font-size="24" font-weight="700" fill="var(--text-primary)">${total}</text><text x="${cx}" y="${cy+14}" text-anchor="middle" font-family="var(--font-body)" font-size="10" fill="var(--text-muted)">packages</text></svg><div class="donut-legend">${legend}</div>`;
+}
+
+function renderTree(D){
+  const container=document.getElementById('dep-tree');
+  if(!D.dependency_tree||D.dependency_tree.length===0){container.innerHTML='<p style="color:var(--text-muted);font-size:.85rem;padding:20px">No dependency tree data available.</p>';return;}
+
+  const root={name:'Project',children:D.dependency_tree.map(buildNode)};
+  function buildNode(n){
+    const node={name:n.name+(n.version?'@'+n.version:''),ecosystem:n.ecosystem,is_outdated:n.is_outdated};
+    const audit=D.audits.find(a=>a.package.name.toLowerCase()===n.name.toLowerCase());
+    node.risk=audit?audit.risk_level:'none';
+    node.vulnCount=audit?audit.vulnerabilities.length:0;
+    if(n.children&&n.children.length>0) node.children=n.children.map(buildNode);
+    return node;
+  }
+
+  const hierarchy=d3.hierarchy(root);
+  const nodeCount=hierarchy.descendants().length;
+  const w=Math.max(container.clientWidth-40,600);
+  const h=Math.max(nodeCount*22,300);
+
+  const treeLayout=d3.tree().size([h,w-260]);
+  treeLayout(hierarchy);
+
+  const svg=d3.select(container).append('svg').attr('width',w).attr('height',h+40)
+    .append('g').attr('transform','translate(130,20)');
+
+  svg.selectAll('.tree-link').data(hierarchy.links()).join('path').attr('class','tree-link')
+    .attr('d',d3.linkHorizontal().x(d=>d.y).y(d=>d.x));
+
+  const nodes=svg.selectAll('.tree-node').data(hierarchy.descendants()).join('g')
+    .attr('class','tree-node').attr('transform',d=>`translate(${d.y},${d.x})`);
+
+  nodes.append('circle').attr('r',5)
+    .attr('fill',d=>d.data.vulnCount>0?severityColor(d.data.risk):'var(--bg-card)')
+    .attr('stroke',d=>d.data.vulnCount>0?severityColor(d.data.risk):d.data.is_outdated?'var(--high)':'var(--accent)')
+    .append('title').text(d=>`${d.data.name}${d.data.vulnCount?' ('+d.data.vulnCount+' vulns)':''}`);
+
+  nodes.append('text').attr('dy','0.35em').attr('x',d=>d.children?-10:10)
+    .attr('text-anchor',d=>d.children?'end':'start').text(d=>d.data.name);
+}
+
+function renderTable(D){
+  const head=document.getElementById('tableHead');
+  const body=document.getElementById('tableBody');
+  head.innerHTML=`<tr><th data-col="name">Package <span class="sort-arrow">▲</span></th><th data-col="version">Version</th><th data-col="ecosystem">Eco</th><th data-col="risk_score">Risk <span class="sort-arrow">▲</span></th><th data-col="risk_level">Severity</th><th>Vulnerabilities</th><th data-col="outdated">Status</th></tr>`;
+
+  let audits=[...D.audits];
+  let sortCol='risk_score',sortDir=-1,filterMode='all',searchTerm='';
+
+  function render(){
+    let filtered=audits;
+    if(filterMode==='vulnerable') filtered=filtered.filter(a=>a.vulnerabilities.length>0);
+    else if(filterMode==='outdated') filtered=filtered.filter(a=>a.package.is_outdated);
+    else if(filterMode==='critical') filtered=filtered.filter(a=>a.risk_level==='critical');
+    else if(filterMode==='high') filtered=filtered.filter(a=>a.risk_level==='high'||a.risk_level==='critical');
+
+    if(searchTerm) filtered=filtered.filter(a=>a.package.name.toLowerCase().includes(searchTerm));
+
+    filtered.sort((a,b)=>{
+      let va,vb;
+      if(sortCol==='name'){va=a.package.name.toLowerCase();vb=b.package.name.toLowerCase();return va<vb?-sortDir:va>vb?sortDir:0;}
+      if(sortCol==='risk_score'){va=a.risk_score;vb=b.risk_score;}
+      else if(sortCol==='outdated'){va=a.package.is_outdated?1:0;vb=b.package.is_outdated?1:0;}
+      else{va=a[sortCol]||'';vb=b[sortCol]||'';}
+      return (va-vb)*sortDir;
+    });
+
+    body.innerHTML=filtered.map(a=>{
+      const p=a.package;
+      const vulnHtml=a.vulnerabilities.length?`<ul class="vuln-list">${a.vulnerabilities.slice(0,4).map(v=>`<li><span class="vuln-id">${escHtml(v.id)}</span><span class="vuln-src">${v.source}</span></li>`).join('')}${a.vulnerabilities.length>4?`<li style="color:var(--text-muted)">+${a.vulnerabilities.length-4} more</li>`:''}</ul>`:'<span style="color:var(--text-muted);font-size:.78rem">None found</span>';
+      const statusBadges=(p.is_outdated?'<span class="badge badge--outdated">Outdated</span>':'<span style="color:var(--text-muted);font-size:.78rem">Up to date</span>');
+      return `<tr><td><span class="pkg-name">${escHtml(p.name)}</span></td><td><span class="pkg-ver">${escHtml(p.version)||'—'}</span>${p.latest_version&&p.is_outdated?` <span style="font-size:.7rem;color:var(--text-muted)">→ ${escHtml(p.latest_version)}</span>`:''}</td><td><span style="font-size:.75rem;color:var(--text-muted)">${p.ecosystem}</span></td><td><span class="score-pill" style="color:${severityColor(a.risk_level)}">${a.risk_score}</span></td><td><span class="badge badge--${a.risk_level}">${a.risk_level}</span></td><td>${vulnHtml}</td><td>${statusBadges}</td></tr>`;
+    }).join('');
+  }
+
+  head.querySelectorAll('th[data-col]').forEach(th=>{
+    th.addEventListener('click',()=>{
+      const col=th.dataset.col;
+      if(sortCol===col) sortDir*=-1; else{sortCol=col;sortDir=-1;}
+      head.querySelectorAll('th').forEach(t=>t.classList.remove('sorted'));
+      th.classList.add('sorted');
+      render();
+    });
+  });
+
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      filterMode=btn.dataset.filter;
+      render();
+    });
+  });
+
+  document.getElementById('tableSearch').addEventListener('input',e=>{
+    searchTerm=e.target.value.trim().toLowerCase();
+    render();
+  });
+
+  render();
+}
+
+function renderVulnCards(D){
+  const cards=document.getElementById('vulnCards');
+  const allVulns=[];
+  D.audits.forEach(a=>{
+    a.vulnerabilities.forEach(v=>{
+      allVulns.push({...v,pkg:a.package.name,pkgVer:a.package.version});
+    });
+  });
+
+  if(!allVulns.length){
+    document.getElementById('vulnDetailSection').style.display='none';
+    return;
+  }
+
+  const sevOrder={critical:0,high:1,medium:2,low:3,none:4};
+  allVulns.sort((a,b)=>(sevOrder[a.severity]||4)-(sevOrder[b.severity]||4)||b.cvss_score-a.cvss_score);
+
+  cards.innerHTML=allVulns.slice(0,30).map(v=>{
+    const refs=v.references&&v.references.length?v.references.slice(0,2).map(r=>`<a href="${escHtml(r)}" target="_blank" rel="noopener">${shortenUrl(r)}</a>`).join(' &middot; '):'';
+    return `<div class="vuln-card vuln-card--${v.severity}">
+      <div class="vuln-card-header">
+        <span class="vuln-card-id">${escHtml(v.id)}</span>
+        <span class="badge badge--${v.severity}">${v.severity}</span>
+        <span class="score-pill" style="color:${severityColor(v.severity)}">${v.cvss_score>0?v.cvss_score.toFixed(1):'N/A'}</span>
+        <span class="vuln-card-pkg">${escHtml(v.pkg)}@${escHtml(v.pkgVer||'*')}</span>
+      </div>
+      <div class="vuln-card-body">${escHtml(v.summary)}</div>
+      <div class="vuln-card-meta">
+        ${v.fixed_version?`<span>Fix: <strong style="color:var(--accent)">${escHtml(v.fixed_version)}</strong></span>`:''}
+        ${v.published?`<span>Published: ${escHtml(v.published)}</span>`:''}
+        ${v.cwe_ids&&v.cwe_ids.length?`<span>${v.cwe_ids.join(', ')}</span>`:''}
+        ${refs?`<span>${refs}</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function shortenUrl(u){try{return new URL(u).hostname.replace('www.','')}catch(e){return u.substring(0,40)}}
+
+function renderRecommendations(D){
+  const box=document.getElementById('recBox');
+  const recs=[];
+
+  const critPkgs=D.audits.filter(a=>a.risk_level==='critical');
+  const highPkgs=D.audits.filter(a=>a.risk_level==='high');
+  const outdatedPkgs=D.audits.filter(a=>a.package.is_outdated);
+
+  if(critPkgs.length){
+    recs.push({priority:'critical',text:`<strong>Immediately remediate ${critPkgs.length} critical-risk package${critPkgs.length>1?'s':''}:</strong> ${critPkgs.map(a=>a.package.name).join(', ')}. Check the fixed versions listed above and upgrade as soon as possible.`});
+  }
+  if(highPkgs.length){
+    recs.push({priority:'high',text:`<strong>Address ${highPkgs.length} high-risk package${highPkgs.length>1?'s':''}:</strong> ${highPkgs.map(a=>a.package.name).join(', ')}. Schedule upgrades within the current development cycle.`});
+  }
+  if(outdatedPkgs.length){
+    recs.push({priority:'medium',text:`<strong>${outdatedPkgs.length} outdated package${outdatedPkgs.length>1?'s':''}:</strong> ${outdatedPkgs.slice(0,8).map(a=>a.package.name).join(', ')}${outdatedPkgs.length>8?` and ${outdatedPkgs.length-8} more`:''} are behind their latest releases. Keeping dependencies current reduces future exposure to newly disclosed CVEs.`});
+  }
+
+  const transitive=D.audits.filter(a=>!a.package.is_direct&&a.vulnerabilities.length>0);
+  if(transitive.length){
+    recs.push({priority:'medium',text:`<strong>${transitive.length} vulnerable transitive dependency${transitive.length>1?'ies':'y'} found.</strong> These are pulled in by your direct dependencies. Consider overriding pinned versions or requesting upstream maintainers release patches.`});
+  }
+
+  if(D.total_vulnerabilities===0&&D.outdated_count===0){
+    recs.push({priority:'none',text:'<strong>No action required.</strong> All dependencies passed vulnerability checks and appear up to date. Continue routine audits on a regular cadence.'});
+  } else {
+    recs.push({priority:'low',text:'<strong>Integrate this scanner into your CI/CD pipeline</strong> to catch new vulnerabilities as they are disclosed. Automated checks on every pull request prevent vulnerable packages from reaching production.'});
+    recs.push({priority:'low',text:'<strong>Implement a dependency pinning strategy</strong> using lock files (package-lock.json, Pipfile.lock) to ensure reproducible builds and prevent unexpected upgrades introducing unvetted code.'});
+  }
+
+  box.innerHTML=`<h3>Action Items</h3>`+recs.map(r=>`<div class="rec-item"><div class="rec-priority" style="background:${severityColor(r.priority)}"></div><div class="rec-text">${r.text}</div></div>`).join('');
+}
+</script>
+</body>
+</html>

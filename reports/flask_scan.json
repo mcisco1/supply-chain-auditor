@@ -1,0 +1,2081 @@
+{
+  "target_path": "C:\\Users\\Casho\\AppData\\Local\\Temp\\flask-scan",
+  "ecosystems": [
+    "PyPI"
+  ],
+  "total_dependencies": 30,
+  "direct_dependencies": 15,
+  "transitive_dependencies": 15,
+  "total_vulnerabilities": 47,
+  "critical_count": 4,
+  "high_count": 12,
+  "medium_count": 19,
+  "low_count": 3,
+  "outdated_count": 16,
+  "overall_risk_score": 9.3,
+  "overall_risk_level": "critical",
+  "scan_duration": 20.87,
+  "audits": [
+    {
+      "package": {
+        "name": "amqp",
+        "version": "5.1.1",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "5.3.1",
+        "license": "BSD",
+        "description": "Low-level AMQP client for Python (fork of amqplib).",
+        "is_outdated": true,
+        "depth": 0,
+        "children": [
+          {
+            "name": "vine",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "5.1.0",
+            "license": "BSD",
+            "description": "Python promises.",
+            "is_outdated": false,
+            "depth": 1,
+            "children": []
+          }
+        ]
+      },
+      "vulnerabilities": [
+        {
+          "id": "CVE-2016-4432",
+          "source": "NVD",
+          "summary": "The AMQP 0-8, 0-9, 0-91, and 0-10 connection handling in Apache Qpid Java before 6.0.3 might allow remote attackers to bypass authentication and consequently perform actions via vectors related to connection state logging.",
+          "severity": "critical",
+          "cvss_score": 9.1,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://mail-archives.apache.org/mod_mbox/qpid-users/201605.mbox/%3CCAFEMS4tXDKYxKVMmU0zTb_7uzduoUS4_RePnUwz1tj%2BGQLNw5Q%40mail.gmail.com%3E",
+            "http://packetstormsecurity.com/files/137216/Apache-Qpid-Java-Broker-6.0.2-Authentication-Bypass.html",
+            "http://www.securityfocus.com/archive/1/538508/100/0/threaded",
+            "http://www.securitytracker.com/id/1035983",
+            "https://issues.apache.org/jira/browse/QPID-7257"
+          ],
+          "published": "2016-06-01",
+          "cwe_ids": [
+            "CWE-287"
+          ]
+        },
+        {
+          "id": "CVE-2012-4446",
+          "source": "NVD",
+          "summary": "The default configuration for Apache Qpid 0.20 and earlier, when the federation_tag attribute is enabled, accepts AMQP connections without checking the source user ID, which allows remote attackers to bypass authentication and have other unspecified impact via an AMQP request.",
+          "severity": "medium",
+          "cvss_score": 6.8,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://rhn.redhat.com/errata/RHSA-2013-0561.html",
+            "http://rhn.redhat.com/errata/RHSA-2013-0562.html",
+            "http://secunia.com/advisories/52516",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=851355",
+            "https://issues.apache.org/jira/browse/QPID-4631"
+          ],
+          "published": "2013-03-14",
+          "cwe_ids": [
+            "CWE-287"
+          ]
+        },
+        {
+          "id": "CVE-2016-2166",
+          "source": "NVD",
+          "summary": "The (1) proton.reactor.Connector, (2) proton.reactor.Container, and (3) proton.utils.BlockingConnection classes in Apache Qpid Proton before 0.12.1 improperly use an unencrypted connection for an amqps URI scheme when SSL support is unavailable, which might allow man-in-the-middle attackers to obtai",
+          "severity": "medium",
+          "cvss_score": 6.5,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://lists.fedoraproject.org/pipermail/package-announce/2016-April/182414.html",
+            "http://packetstormsecurity.com/files/136403/Apache-Qpid-Proton-0.12.0-SSL-Failure.html",
+            "http://qpid.apache.org/releases/qpid-proton-0.12.1/release-notes.html",
+            "http://www.securityfocus.com/archive/1/537864/100/0/threaded",
+            "https://git-wip-us.apache.org/repos/asf?p=qpid-proton.git%3Bh=a058585"
+          ],
+          "published": "2016-04-12",
+          "cwe_ids": [
+            "CWE-200"
+          ]
+        },
+        {
+          "id": "CVE-2009-5005",
+          "source": "NVD",
+          "summary": "The Cluster::deliveredEvent function in cluster/Cluster.cpp in Apache Qpid, as used in Red Hat Enterprise MRG before 1.3 and other products, allows remote attackers to cause a denial of service (daemon crash and cluster outage) via invalid AMQP data.",
+          "severity": "medium",
+          "cvss_score": 5.0,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://secunia.com/advisories/41710",
+            "http://secunia.com/advisories/41812",
+            "http://svn.apache.org/viewvc?revision=785788&view=revision",
+            "http://www.vupen.com/english/advisories/2010/2684",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=642373"
+          ],
+          "published": "2010-10-18",
+          "cwe_ids": []
+        },
+        {
+          "id": "CVE-2012-3467",
+          "source": "NVD",
+          "summary": "Apache QPID 0.14, 0.16, and earlier uses a NullAuthenticator mechanism to authenticate catch-up shadow connections to AMQP brokers, which allows remote attackers to bypass authentication.",
+          "severity": "medium",
+          "cvss_score": 5.0,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://rhn.redhat.com/errata/RHSA-2012-1277.html",
+            "http://rhn.redhat.com/errata/RHSA-2012-1279.html",
+            "http://secunia.com/advisories/50186",
+            "http://secunia.com/advisories/50698",
+            "http://svn.apache.org/viewvc?view=revision&revision=1352992"
+          ],
+          "published": "2012-08-27",
+          "cwe_ids": [
+            "CWE-287"
+          ]
+        },
+        {
+          "id": "CVE-2012-4458",
+          "source": "NVD",
+          "summary": "The AMQP type decoder in Apache Qpid 0.20 and earlier allows remote attackers to cause a denial of service (memory consumption and server crash) via a large number of zero width elements in the client-properties map in a connection.start-ok message.",
+          "severity": "medium",
+          "cvss_score": 5.0,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://rhn.redhat.com/errata/RHSA-2013-0561.html",
+            "http://rhn.redhat.com/errata/RHSA-2013-0562.html",
+            "http://secunia.com/advisories/52516",
+            "http://svn.apache.org/viewvc?view=revision&revision=1453031",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=861234"
+          ],
+          "published": "2013-03-14",
+          "cwe_ids": [
+            "CWE-189"
+          ]
+        },
+        {
+          "id": "CVE-2014-8711",
+          "source": "NVD",
+          "summary": "Multiple integer overflows in epan/dissectors/packet-amqp.c in the AMQP dissector in Wireshark 1.10.x before 1.10.11 and 1.12.x before 1.12.2 allow remote attackers to cause a denial of service (application crash) via a crafted amqp_0_10 PDU in a packet.",
+          "severity": "medium",
+          "cvss_score": 5.0,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://lists.fedoraproject.org/pipermail/package-announce/2014-December/145658.html",
+            "http://lists.opensuse.org/opensuse-updates/2014-11/msg00104.html",
+            "http://rhn.redhat.com/errata/RHSA-2015-1460.html",
+            "http://secunia.com/advisories/60231",
+            "http://secunia.com/advisories/60290"
+          ],
+          "published": "2014-11-23",
+          "cwe_ids": [
+            "CWE-189"
+          ]
+        },
+        {
+          "id": "CVE-2014-2814",
+          "source": "NVD",
+          "summary": "Microsoft Service Bus 1.1 on Microsoft Windows Server 2008 R2 SP1 and Server 2012 Gold and R2 allows remote authenticated users to cause a denial of service (AMQP messaging outage) via crafted AMQP messages, aka \"Service Bus Denial of Service Vulnerability.\"",
+          "severity": "medium",
+          "cvss_score": 4.0,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://secunia.com/advisories/59780",
+            "http://www.securityfocus.com/bid/68393",
+            "http://www.securitytracker.com/id/1030538",
+            "https://docs.microsoft.com/en-us/security-updates/securitybulletins/2014/ms14-042",
+            "https://support.microsoft.com/kb/2972621"
+          ],
+          "published": "2014-07-08",
+          "cwe_ids": []
+        },
+        {
+          "id": "CVE-2015-0862",
+          "source": "NVD",
+          "summary": "Multiple cross-site scripting (XSS) vulnerabilities in the management web UI in the RabbitMQ management plugin before 3.4.3 allow remote authenticated users to inject arbitrary web script or HTML via (1) message details when a message is unqueued, such as headers or arguments; (2) policy names, whic",
+          "severity": "low",
+          "cvss_score": 3.5,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://www.rabbitmq.com/news.html#2015-01-08T10:14:05+0100",
+            "http://www.rabbitmq.com/news.html#2015-01-08T10:14:05+0100"
+          ],
+          "published": "2015-01-18",
+          "cwe_ids": [
+            "CWE-79"
+          ]
+        },
+        {
+          "id": "CVE-2015-5240",
+          "source": "NVD",
+          "summary": "Race condition in OpenStack Neutron before 2014.2.4 and 2015.1 before 2015.1.2, when using the ML2 plugin or the security groups AMQP API, allows remote authenticated users to bypass IP anti-spoofing controls by changing the device owner of a port to start with network: before the security group rul",
+          "severity": "low",
+          "cvss_score": 3.5,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://rhn.redhat.com/errata/RHSA-2015-1909.html",
+            "http://www.openwall.com/lists/oss-security/2015/09/08/9",
+            "https://bugs.launchpad.net/neutron/+bug/1489111",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=1258458",
+            "https://security.openstack.org/ossa/OSSA-2015-018.html"
+          ],
+          "published": "2015-10-27",
+          "cwe_ids": [
+            "CWE-362"
+          ]
+        }
+      ],
+      "risk_score": 10.0,
+      "risk_level": "critical"
+    },
+    {
+      "package": {
+        "name": "celery",
+        "version": "5.2.7",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "5.6.2",
+        "license": "BSD-3-Clause",
+        "description": "Distributed Task Queue.",
+        "is_outdated": true,
+        "depth": 0,
+        "children": [
+          {
+            "name": "kombu",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "5.6.2",
+            "license": "BSD-3-Clause",
+            "description": "Messaging library for Python.",
+            "is_outdated": false,
+            "depth": 1,
+            "children": []
+          },
+          {
+            "name": "python-dateutil",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "2.9.0.post0",
+            "license": "Dual License",
+            "description": "Extensions to the standard Python datetime module",
+            "is_outdated": false,
+            "depth": 1,
+            "children": []
+          },
+          {
+            "name": "exceptiongroup",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "1.3.1",
+            "license": "MIT License",
+            "description": "Backport of PEP 654 (exception groups)",
+            "is_outdated": false,
+            "depth": 1,
+            "children": [
+              {
+                "name": "typing-extensions",
+                "version": "",
+                "ecosystem": "PyPI",
+                "is_direct": false,
+                "latest_version": "4.15.0",
+                "license": "Unknown",
+                "description": "Backported and Experimental Type Hints for Python 3.9+",
+                "is_outdated": false,
+                "depth": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "tzlocal",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "5.3.1",
+            "license": "MIT",
+            "description": "tzinfo object for the local timezone",
+            "is_outdated": false,
+            "depth": 1,
+            "children": []
+          }
+        ]
+      },
+      "vulnerabilities": [
+        {
+          "id": "CVE-2018-16879",
+          "source": "NVD",
+          "summary": "Ansible Tower before version 3.3.3 does not set a secure channel as it is using the default insecure configuration channel settings for messaging celery workers from RabbitMQ. This could lead in data leak of sensitive information such as passwords as well as denial of service attacks by deleting pro",
+          "severity": "critical",
+          "cvss_score": 9.8,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://www.securityfocus.com/bid/106310",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16879",
+            "http://www.securityfocus.com/bid/106310",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=CVE-2018-16879"
+          ],
+          "published": "2019-01-03",
+          "cwe_ids": [
+            "CWE-311",
+            "CWE-311"
+          ]
+        },
+        {
+          "id": "CVE-2020-11981",
+          "source": "NVD",
+          "summary": "An issue was found in Apache Airflow versions 1.10.10 and below. When using CeleryExecutor, if an attacker can connect to the broker (Redis, RabbitMQ) directly, it is possible to inject commands, resulting in the celery worker running arbitrary commands.",
+          "severity": "critical",
+          "cvss_score": 9.8,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "https://lists.apache.org/thread.html/r7255cf0be3566f23a768e2a04b40fb09e52fcd1872695428ba9afe91%40%3Cusers.airflow.apache.org%3E",
+            "https://lists.apache.org/thread.html/r7255cf0be3566f23a768e2a04b40fb09e52fcd1872695428ba9afe91%40%3Cusers.airflow.apache.org%3E"
+          ],
+          "published": "2020-07-17",
+          "cwe_ids": [
+            "CWE-78"
+          ]
+        },
+        {
+          "id": "CVE-2020-11982",
+          "source": "NVD",
+          "summary": "An issue was found in Apache Airflow versions 1.10.10 and below. When using CeleryExecutor, if an attack can connect to the broker (Redis, RabbitMQ) directly, it was possible to insert a malicious payload directly to the broker which could lead to a deserialization attack (and thus remote code execu",
+          "severity": "critical",
+          "cvss_score": 9.8,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "https://lists.apache.org/thread.html/r7255cf0be3566f23a768e2a04b40fb09e52fcd1872695428ba9afe91%40%3Cusers.airflow.apache.org%3E",
+            "https://lists.apache.org/thread.html/r7255cf0be3566f23a768e2a04b40fb09e52fcd1872695428ba9afe91%40%3Cusers.airflow.apache.org%3E"
+          ],
+          "published": "2020-07-17",
+          "cwe_ids": [
+            "CWE-502"
+          ]
+        },
+        {
+          "id": "CVE-2022-30034",
+          "source": "NVD",
+          "summary": "Flower, a web UI for the Celery Python RPC framework, all versions as of 05-02-2022 is vulnerable to an OAuth authentication bypass. An attacker could then access the Flower API to discover and invoke arbitrary Celery RPC calls or deny service by shutting down Celery task nodes.",
+          "severity": "high",
+          "cvss_score": 8.6,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://githubcommherflower.com",
+            "https://github.com/mher/flower/issues/1217",
+            "https://tprynn.github.io/2022/05/26/flower-vulns.html",
+            "http://githubcommherflower.com",
+            "https://github.com/mher/flower/issues/1217"
+          ],
+          "published": "2022-06-02",
+          "cwe_ids": [
+            "CWE-287"
+          ]
+        },
+        {
+          "id": "CVE-2021-23727",
+          "source": "NVD",
+          "summary": "This affects the package celery before 5.2.2. It by default trusts the messages and metadata stored in backends (result stores). When reading task metadata from the backend, the data is deserialized. Given that an attacker can gain access to, or somehow manipulate the metadata within a celery backen",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "https://github.com/celery/celery/blob/master/Changelog.rst%23522",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SYXRGHWHD2WWMHBWCVD5ULVINPKNY3P5/",
+            "https://snyk.io/vuln/SNYK-PYTHON-CELERY-2314953",
+            "https://github.com/celery/celery/blob/master/Changelog.rst%23522",
+            "https://lists.fedoraproject.org/archives/list/package-announce%40lists.fedoraproject.org/message/SYXRGHWHD2WWMHBWCVD5ULVINPKNY3P5/"
+          ],
+          "published": "2021-12-29",
+          "cwe_ids": [
+            "CWE-77"
+          ]
+        },
+        {
+          "id": "CVE-2023-25657",
+          "source": "NVD",
+          "summary": "Nautobot is a Network Source of Truth and Network Automation Platform. All users of Nautobot versions earlier than 1.5.7 are impacted by a remote code execution vulnerability. Nautobot did not properly sandbox Jinja2 template rendering. In Nautobot 1.5.7 has enabled sandboxed environments for the Ji",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "https://github.com/nautobot/nautobot/commit/d47f157e83b0c353bb2b697f911882c71cf90ca0",
+            "https://github.com/nautobot/nautobot/security/advisories/GHSA-8mfq-f5wj-vw5m",
+            "https://jinja.palletsprojects.com/en/3.0.x/sandbox/#sandbox",
+            "https://github.com/nautobot/nautobot/commit/d47f157e83b0c353bb2b697f911882c71cf90ca0",
+            "https://github.com/nautobot/nautobot/security/advisories/GHSA-8mfq-f5wj-vw5m"
+          ],
+          "published": "2023-02-21",
+          "cwe_ids": [
+            "CWE-94"
+          ]
+        },
+        {
+          "id": "CVE-2023-46215",
+          "source": "NVD",
+          "summary": "Insertion of Sensitive Information into Log File vulnerability in Apache Airflow Celery provider, Apache Airflow.\n\nSensitive information logged as clear text when rediss, amqp, rpc protocols are used as Celery result backend\nNote: the\u00a0vulnerability is about the information exposed in the logs not ab",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://www.openwall.com/lists/oss-security/2023/10/28/1",
+            "https://github.com/apache/airflow/pull/34954",
+            "https://lists.apache.org/thread/wm1jfmks7r6m7bj0mq4lmw3998svn46n",
+            "http://www.openwall.com/lists/oss-security/2023/10/28/1",
+            "https://github.com/apache/airflow/pull/34954"
+          ],
+          "published": "2023-10-28",
+          "cwe_ids": [
+            "CWE-532"
+          ]
+        },
+        {
+          "id": "CVE-2011-4356",
+          "source": "NVD",
+          "summary": "Celery 2.1 and 2.2 before 2.2.8, 2.3 before 2.3.4, and 2.4 before 2.4.4 changes the effective id but not the real id during processing of the --uid and --gid arguments to celerybeat, celeryd_detach, celeryd-multi, and celeryev, which allows local users to gain privileges via vectors involving crafte",
+          "severity": "medium",
+          "cvss_score": 6.9,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://secunia.com/advisories/46973",
+            "http://www.securityfocus.com/bid/50825",
+            "https://github.com/ask/celery/blob/master/docs/sec/CELERYSA-0001.txt",
+            "https://github.com/ask/celery/pull/544",
+            "http://secunia.com/advisories/46973"
+          ],
+          "published": "2011-12-05",
+          "cwe_ids": [
+            "CWE-264"
+          ]
+        },
+        {
+          "id": "CVE-2017-14483",
+          "source": "NVD",
+          "summary": "flower.initd in the Gentoo dev-python/flower package before 0.9.1-r1 for Celery Flower sets PID file ownership to a non-root account, which might allow local users to kill arbitrary processes by leveraging access to this non-root account for PID file modification before a root script executes a \"kil",
+          "severity": "medium",
+          "cvss_score": 5.5,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "https://bugs.gentoo.org/631020",
+            "https://bugs.gentoo.org/631020"
+          ],
+          "published": "2017-09-15",
+          "cwe_ids": [
+            "CWE-362"
+          ]
+        },
+        {
+          "id": "CVE-2021-35936",
+          "source": "NVD",
+          "summary": "If remote logging is not used, the worker (in the case of CeleryExecutor) or the scheduler (in the case of LocalExecutor) runs a Flask logging server and is listening on a specific port and also binds on 0.0.0.0 by default. This logging server had no authentication and allows reading log files of DA",
+          "severity": "medium",
+          "cvss_score": 5.3,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "https://lists.apache.org/thread.html/r53d6bd7b0a66f92ddaf1313282f10fec802e71246606dd30c16536df%40%3Cusers.airflow.apache.org%3E",
+            "https://lists.apache.org/thread.html/r53d6bd7b0a66f92ddaf1313282f10fec802e71246606dd30c16536df%40%3Cusers.airflow.apache.org%3E"
+          ],
+          "published": "2021-08-16",
+          "cwe_ids": [
+            "CWE-200",
+            "CWE-306"
+          ]
+        }
+      ],
+      "risk_score": 10.0,
+      "risk_level": "critical"
+    },
+    {
+      "package": {
+        "name": "werkzeug",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "3.1.6",
+        "license": "Unknown",
+        "description": "The comprehensive WSGI web application library.",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [
+        {
+          "id": "GHSA-2g68-c3qc-8985",
+          "source": "OSV",
+          "summary": "Werkzeug debugger vulnerable to remote execution when interacting with attacker controlled domain",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": ">=0, <3.0.3",
+          "fixed_version": "3.0.3",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-2g68-c3qc-8985",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-34069",
+            "https://github.com/pallets/werkzeug/commit/3386395b24c7371db11a5b8eaac0c91da5362692",
+            "https://github.com/pallets/werkzeug",
+            "https://lists.debian.org/debian-lts-announce/2025/02/msg00026.html"
+          ],
+          "published": "2024-05-06T14:21:27Z",
+          "cwe_ids": [
+            "CWE-352"
+          ]
+        },
+        {
+          "id": "GHSA-gq9m-qvpx-68hc",
+          "source": "OSV",
+          "summary": "Pallets Werkzeug Insufficient Entropy",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": ">=0, <0.15.3",
+          "fixed_version": "0.15.3",
+          "references": [
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-14806",
+            "https://github.com/pallets/werkzeug/commit/00bc43b1672e662e5e3b8cecd79e67fc968fa246",
+            "https://github.com/pallets/werkzeug",
+            "https://github.com/pallets/werkzeug/blob/7fef41b120327d3912fbe12fb64f1951496fcf3e/src/werkzeug/debug/__init__.py#L168",
+            "https://github.com/pypa/advisory-database/tree/main/vulns/werkzeug/PYSEC-2019-140.yaml"
+          ],
+          "published": "2019-08-21T16:15:24Z",
+          "cwe_ids": [
+            "CWE-331"
+          ]
+        },
+        {
+          "id": "GHSA-j544-7q9p-6xp8",
+          "source": "OSV",
+          "summary": "Pallets Werkzeug vulnerable to Path Traversal",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": ">=0, <0.15.5",
+          "fixed_version": "0.15.5",
+          "references": [
+            "https://nvd.nist.gov/vuln/detail/CVE-2019-14322",
+            "https://github.com/pallets/werkzeug",
+            "https://palletsprojects.com/blog/werkzeug-0-15-5-released",
+            "http://packetstormsecurity.com/files/163398/Pallets-Werkzeug-0.15.4-Path-Traversal.html"
+          ],
+          "published": "2022-05-24T16:51:33Z",
+          "cwe_ids": [
+            "CWE-22"
+          ]
+        },
+        {
+          "id": "GHSA-q34m-jh98-gwm2",
+          "source": "OSV",
+          "summary": "Werkzeug possible resource exhaustion when parsing file data in forms",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": ">=0, <0.20.0",
+          "fixed_version": "0.20.0",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-q34m-jh98-gwm2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-49767",
+            "https://github.com/pallets/quart/commit/5e78c4169b8eb66b91ead3e62d44721b9e1644ee",
+            "https://github.com/pallets/quart/commit/abb04a512496206de279225340ed022852fbf51f",
+            "https://github.com/pallets/werkzeug/commit/50cfeebcb0727e18cc52ffbeb125f4a66551179b"
+          ],
+          "published": "2024-10-25T19:44:43Z",
+          "cwe_ids": [
+            "CWE-400"
+          ]
+        },
+        {
+          "id": "GHSA-xg9f-g7g7-2323",
+          "source": "OSV",
+          "summary": "High resource usage when parsing multipart form data with many fields",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": ">=0, <2.2.3",
+          "fixed_version": "2.2.3",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-xg9f-g7g7-2323",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-25577",
+            "https://github.com/pallets/werkzeug/commit/517cac5a804e8c4dc4ed038bb20dacd038e7a9f1",
+            "https://github.com/pallets/werkzeug",
+            "https://github.com/pallets/werkzeug/releases/tag/2.2.3"
+          ],
+          "published": "2023-02-15T15:36:26Z",
+          "cwe_ids": [
+            "CWE-400",
+            "CWE-770"
+          ]
+        },
+        {
+          "id": "PYSEC-2023-221",
+          "source": "OSV",
+          "summary": "Werkzeug is a comprehensive WSGI web application library. If an upload of a file that starts with CR or LF and then is followed by megabytes of data without these characters: all of these bytes are appended chunk by chunk into internal bytearray and lookup for boundary is performed on growing buffer",
+          "severity": "high",
+          "cvss_score": 7.5,
+          "affected_versions": ">=0, <2.3.8",
+          "fixed_version": "2.3.8",
+          "references": [
+            "https://github.com/pallets/werkzeug/commit/f3c803b3ade485a45f12b6d6617595350c0f03e2",
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-hrfv-mqp8-q5rw"
+          ],
+          "published": "2023-10-25T18:17:00Z",
+          "cwe_ids": []
+        },
+        {
+          "id": "GHSA-3p3h-qghp-hvh2",
+          "source": "OSV",
+          "summary": "Open Redirect in werkzeug",
+          "severity": "medium",
+          "cvss_score": 6.1,
+          "affected_versions": ">=0, <0.11.6",
+          "fixed_version": "0.11.6",
+          "references": [
+            "https://nvd.nist.gov/vuln/detail/CVE-2020-28724",
+            "https://github.com/pallets/flask/issues/1639",
+            "https://github.com/pallets/werkzeug/issues/822",
+            "https://github.com/pallets/werkzeug/pull/890/files",
+            "https://github.com/pallets/werkzeug"
+          ],
+          "published": "2021-04-20T16:30:26Z",
+          "cwe_ids": [
+            "CWE-601"
+          ]
+        },
+        {
+          "id": "GHSA-h2fp-xgx6-xh6f",
+          "source": "OSV",
+          "summary": "Pallets Werkzeug cross-site scripting vulnerability",
+          "severity": "medium",
+          "cvss_score": 6.1,
+          "affected_versions": ">=0, <0.11.11",
+          "fixed_version": "0.11.11",
+          "references": [
+            "https://nvd.nist.gov/vuln/detail/CVE-2016-10516",
+            "https://github.com/pallets/werkzeug/pull/1001",
+            "https://github.com/pallets/werkzeug/commit/1034edc7f901dd645ec6e462754111b39002bd65",
+            "https://github.com/advisories/GHSA-h2fp-xgx6-xh6f",
+            "https://github.com/pallets/werkzeug"
+          ],
+          "published": "2022-05-14T03:46:35Z",
+          "cwe_ids": [
+            "CWE-79"
+          ]
+        },
+        {
+          "id": "GHSA-hrfv-mqp8-q5rw",
+          "source": "OSV",
+          "summary": "Werkzeug DoS: High resource usage when parsing multipart/form-data containing a large part with CR/LF character at the beginning",
+          "severity": "medium",
+          "cvss_score": 5.7,
+          "affected_versions": ">=0, <2.3.8",
+          "fixed_version": "2.3.8",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-hrfv-mqp8-q5rw",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-46136",
+            "https://github.com/pallets/werkzeug/commit/b1916c0c083e0be1c9d887ee2f3d696922bfc5c1",
+            "https://github.com/pallets/werkzeug/commit/f2300208d5e2a5076cbbb4c2aad71096fd040ef9",
+            "https://github.com/pallets/werkzeug/commit/f3c803b3ade485a45f12b6d6617595350c0f03e2"
+          ],
+          "published": "2023-10-25T14:22:59Z",
+          "cwe_ids": [
+            "CWE-400",
+            "CWE-787"
+          ]
+        },
+        {
+          "id": "GHSA-87hc-h4r5-73f7",
+          "source": "OSV",
+          "summary": " Werkzeug safe_join() allows Windows special device names with compound extensions",
+          "severity": "medium",
+          "cvss_score": 5.3,
+          "affected_versions": ">=0, <3.1.5",
+          "fixed_version": "3.1.5",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-87hc-h4r5-73f7",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-21860",
+            "https://github.com/pallets/werkzeug/commit/7ae1d254e04a0c33e241ac1cca4783ce6c875ca3",
+            "https://github.com/pallets/werkzeug"
+          ],
+          "published": "2026-01-08T19:51:21Z",
+          "cwe_ids": [
+            "CWE-67"
+          ]
+        },
+        {
+          "id": "GHSA-px8h-6qxv-m22q",
+          "source": "OSV",
+          "summary": "Incorrect parsing of nameless cookies leads to __Host- cookies bypass",
+          "severity": "low",
+          "cvss_score": 2.6,
+          "affected_versions": ">=0, <2.2.3",
+          "fixed_version": "2.2.3",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-px8h-6qxv-m22q",
+            "https://nvd.nist.gov/vuln/detail/CVE-2023-23934",
+            "https://github.com/pallets/werkzeug/commit/cf275f42acad1b5950c50ffe8ef58fe62cdce028",
+            "https://github.com/pallets/werkzeug",
+            "https://github.com/pallets/werkzeug/releases/tag/2.2.3"
+          ],
+          "published": "2023-02-15T15:37:03Z",
+          "cwe_ids": [
+            "CWE-20"
+          ]
+        },
+        {
+          "id": "GHSA-f9vj-2wh5-fj8j",
+          "source": "OSV",
+          "summary": "Werkzeug safe_join not safe on Windows",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <3.0.6",
+          "fixed_version": "3.0.6",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-f9vj-2wh5-fj8j",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-49766",
+            "https://github.com/pallets/werkzeug/commit/2767bcb10a7dd1c297d812cc5e6d11a474c1f092",
+            "https://github.com/pallets/werkzeug",
+            "https://github.com/pallets/werkzeug/releases/tag/3.0.6"
+          ],
+          "published": "2024-10-25T19:43:41Z",
+          "cwe_ids": [
+            "CWE-22"
+          ]
+        },
+        {
+          "id": "GHSA-hgf8-39gv-g3f2",
+          "source": "OSV",
+          "summary": "Werkzeug safe_join() allows Windows special device names",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <3.1.4",
+          "fixed_version": "3.1.4",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-hgf8-39gv-g3f2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-66221",
+            "https://github.com/pallets/werkzeug/commit/4b833376a45c323a189cd11d2362bcffdb1c0c13",
+            "https://github.com/pallets/werkzeug",
+            "https://github.com/pallets/werkzeug/releases/tag/3.1.4"
+          ],
+          "published": "2025-12-02T00:27:38Z",
+          "cwe_ids": [
+            "CWE-67"
+          ]
+        },
+        {
+          "id": "PYSEC-2017-43",
+          "source": "OSV",
+          "summary": "Cross-site scripting (XSS) vulnerability in the render_full function in debug/tbtools.py in the debugger in Pallets Werkzeug before 0.11.11 (as used in Pallets Flask and other products) allows remote attackers to inject arbitrary web script or HTML via a field that contains an exception message.",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <0.11.11",
+          "fixed_version": "0.11.11",
+          "references": [
+            "https://github.com/pallets/werkzeug/pull/1001",
+            "http://blog.neargle.com/2016/09/21/flask-src-review-get-a-xss-from-debuger/",
+            "https://lists.debian.org/debian-lts-announce/2017/11/msg00037.html",
+            "https://github.com/advisories/GHSA-h2fp-xgx6-xh6f"
+          ],
+          "published": "2017-10-23T16:29:00Z",
+          "cwe_ids": []
+        },
+        {
+          "id": "PYSEC-2019-140",
+          "source": "OSV",
+          "summary": "Pallets Werkzeug before 0.15.3, when used with Docker, has insufficient debugger PIN randomness because Docker containers share the same machine id.",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <0.15.3",
+          "fixed_version": "0.15.3",
+          "references": [
+            "https://github.com/pallets/werkzeug/commit/00bc43b1672e662e5e3b8cecd79e67fc968fa246",
+            "https://github.com/pallets/werkzeug/blob/7fef41b120327d3912fbe12fb64f1951496fcf3e/src/werkzeug/debug/__init__.py#L168",
+            "https://palletsprojects.com/blog/werkzeug-0-15-3-released/",
+            "http://lists.opensuse.org/opensuse-security-announce/2019-09/msg00034.html",
+            "http://lists.opensuse.org/opensuse-security-announce/2019-09/msg00047.html"
+          ],
+          "published": "2019-08-09T15:15:00Z",
+          "cwe_ids": []
+        },
+        {
+          "id": "PYSEC-2020-157",
+          "source": "OSV",
+          "summary": "Open redirect vulnerability in werkzeug before 0.11.6 via a double slash in the URL.",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <0.11.6",
+          "fixed_version": "0.11.6",
+          "references": [
+            "https://github.com/pallets/werkzeug/issues/822",
+            "https://github.com/pallets/werkzeug/pull/890/files",
+            "https://github.com/pallets/flask/issues/1639",
+            "https://github.com/advisories/GHSA-3p3h-qghp-hvh2"
+          ],
+          "published": "2020-11-18T15:15:00Z",
+          "cwe_ids": []
+        },
+        {
+          "id": "PYSEC-2022-203",
+          "source": "OSV",
+          "summary": "** DISPUTED ** Improper parsing of HTTP requests in Pallets Werkzeug v2.1.0 and below allows attackers to perform HTTP Request Smuggling using a crafted HTTP request with multiple requests included inside the body. NOTE: the vendor's position is that this behavior can only occur in unsupported confi",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <2.1.1",
+          "fixed_version": "2.1.1",
+          "references": [
+            "https://github.com/pallets/werkzeug/commit/9a3a981d70d2e9ec3344b5192f86fcaf3210cd85",
+            "https://github.com/pallets/werkzeug/issues/2420"
+          ],
+          "published": "2022-05-25T01:15:00Z",
+          "cwe_ids": []
+        },
+        {
+          "id": "PYSEC-2023-57",
+          "source": "OSV",
+          "summary": "Werkzeug is a comprehensive WSGI web application library. Browsers may allow \"nameless\" cookies that look like `=value` instead of `key=value`. A vulnerable browser may allow a compromised application on an adjacent subdomain to exploit this to set a cookie like `=__Host-test=bad` for another subdom",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <2.2.3",
+          "fixed_version": "2.2.3",
+          "references": [
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-px8h-6qxv-m22q",
+            "https://github.com/pallets/werkzeug/commit/cf275f42acad1b5950c50ffe8ef58fe62cdce028",
+            "https://github.com/pallets/werkzeug/releases/tag/2.2.3"
+          ],
+          "published": "2023-02-14T20:15:00Z",
+          "cwe_ids": []
+        },
+        {
+          "id": "PYSEC-2023-58",
+          "source": "OSV",
+          "summary": "Werkzeug is a comprehensive WSGI web application library. Prior to version 2.2.3, Werkzeug's multipart form data parser will parse an unlimited number of parts, including file parts. Parts can be a small amount of bytes, but each requires CPU time to parse and may use more memory as Python data. If ",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <2.2.3",
+          "fixed_version": "2.2.3",
+          "references": [
+            "https://github.com/pallets/werkzeug/commit/517cac5a804e8c4dc4ed038bb20dacd038e7a9f1",
+            "https://github.com/pallets/werkzeug/releases/tag/2.2.3",
+            "https://github.com/pallets/werkzeug/security/advisories/GHSA-xg9f-g7g7-2323"
+          ],
+          "published": "2023-02-14T20:15:00Z",
+          "cwe_ids": []
+        }
+      ],
+      "risk_score": 10.0,
+      "risk_level": "critical"
+    },
+    {
+      "package": {
+        "name": "jinja2",
+        "version": "3.1.2",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "3.1.6",
+        "license": "BSD License",
+        "description": "A very fast and expressive template engine.",
+        "is_outdated": true,
+        "depth": 0,
+        "children": [
+          {
+            "name": "MarkupSafe",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "3.0.3",
+            "license": "Unknown",
+            "description": "Safely add untrusted strings to HTML/XML markup.",
+            "is_outdated": false,
+            "depth": 1,
+            "children": []
+          }
+        ]
+      },
+      "vulnerabilities": [
+        {
+          "id": "GHSA-gmj6-6f8f-6699",
+          "source": "OSV",
+          "summary": "Jinja has a sandbox breakout through malicious filenames",
+          "severity": "high",
+          "cvss_score": 8.8,
+          "affected_versions": ">=3.0.0, <3.1.5",
+          "fixed_version": "3.1.5",
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-gmj6-6f8f-6699",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-56201",
+            "https://github.com/pallets/jinja/issues/1792",
+            "https://github.com/pallets/jinja/commit/767b23617628419ae3709ccfb02f9602ae9fe51f",
+            "https://github.com/pallets/jinja"
+          ],
+          "published": "2024-12-23T17:54:12Z",
+          "cwe_ids": [
+            "CWE-150"
+          ]
+        },
+        {
+          "id": "GHSA-q2x7-8rv6-6q7h",
+          "source": "OSV",
+          "summary": "Jinja has a sandbox breakout through indirect reference to format method",
+          "severity": "high",
+          "cvss_score": 7.8,
+          "affected_versions": ">=0, <3.1.5",
+          "fixed_version": "3.1.5",
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-q2x7-8rv6-6q7h",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-56326",
+            "https://github.com/pallets/jinja/commit/48b0687e05a5466a91cd5812d604fa37ad0943b4",
+            "https://github.com/pallets/jinja",
+            "https://github.com/pallets/jinja/releases/tag/3.1.5"
+          ],
+          "published": "2024-12-23T17:56:08Z",
+          "cwe_ids": [
+            "CWE-693"
+          ]
+        },
+        {
+          "id": "GHSA-h5c8-rqwp-cp95",
+          "source": "OSV",
+          "summary": "Jinja vulnerable to HTML attribute injection when passing user input as keys to xmlattr filter",
+          "severity": "medium",
+          "cvss_score": 5.4,
+          "affected_versions": ">=0, <3.1.3",
+          "fixed_version": "3.1.3",
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-h5c8-rqwp-cp95",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-22195",
+            "https://github.com/pallets/jinja/commit/716795349a41d4983a9a4771f7d883c96ea17be7",
+            "https://github.com/pallets/jinja",
+            "https://github.com/pallets/jinja/releases/tag/3.1.3"
+          ],
+          "published": "2024-01-11T15:20:48Z",
+          "cwe_ids": [
+            "CWE-79"
+          ]
+        },
+        {
+          "id": "GHSA-h75v-3vvj-5mfj",
+          "source": "OSV",
+          "summary": "Jinja vulnerable to HTML attribute injection when passing user input as keys to xmlattr filter",
+          "severity": "medium",
+          "cvss_score": 5.4,
+          "affected_versions": ">=0, <3.1.4",
+          "fixed_version": "3.1.4",
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-h75v-3vvj-5mfj",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-34064",
+            "https://github.com/pallets/jinja/commit/0668239dc6b44ef38e7a6c9f91f312fd4ca581cb",
+            "https://github.com/pallets/jinja",
+            "https://lists.debian.org/debian-lts-announce/2024/12/msg00009.html"
+          ],
+          "published": "2024-05-06T14:20:59Z",
+          "cwe_ids": [
+            "CWE-79"
+          ]
+        },
+        {
+          "id": "GHSA-cpwx-vrp4-4pq7",
+          "source": "OSV",
+          "summary": "Jinja2 vulnerable to sandbox breakout through attr filter selecting format method",
+          "severity": "none",
+          "cvss_score": 0.0,
+          "affected_versions": ">=0, <3.1.6",
+          "fixed_version": "3.1.6",
+          "references": [
+            "https://github.com/pallets/jinja/security/advisories/GHSA-cpwx-vrp4-4pq7",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-27516",
+            "https://github.com/pallets/jinja/commit/90457bbf33b8662926ae65cdde4c4c32e756e403",
+            "https://github.com/pallets/jinja",
+            "https://lists.debian.org/debian-lts-announce/2025/04/msg00022.html"
+          ],
+          "published": "2025-03-05T20:40:14Z",
+          "cwe_ids": [
+            "CWE-1336"
+          ]
+        }
+      ],
+      "risk_score": 8.3,
+      "risk_level": "critical"
+    },
+    {
+      "package": {
+        "name": "vine",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "5.1.0",
+        "license": "BSD",
+        "description": "Python promises.",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [
+        {
+          "id": "CVE-2016-1143",
+          "source": "NVD",
+          "summary": "Cross-site scripting (XSS) vulnerability in main.rb in Vine MV before 2015-11-08 allows remote attackers to inject arbitrary web script or HTML via unspecified vectors.",
+          "severity": "medium",
+          "cvss_score": 6.1,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://jvn.jp/en/jp/JVN12165579/index.html",
+            "http://jvndb.jvn.jp/jvndb/JVNDB-2016-000016",
+            "https://github.com/ikeay/vinemv/commit/f41efbcac1f9262a161ebc1babfcf55fae9e939a",
+            "http://jvn.jp/en/jp/JVN12165579/index.html",
+            "http://jvndb.jvn.jp/jvndb/JVNDB-2016-000016"
+          ],
+          "published": "2016-01-30",
+          "cwe_ids": [
+            "CWE-79"
+          ]
+        },
+        {
+          "id": "CVE-2014-7488",
+          "source": "NVD",
+          "summary": "The Vineyard All In (aka com.wVineyardAllIn) application 0.1 for Android does not verify X.509 certificates from SSL servers, which allows man-in-the-middle attackers to spoof servers and obtain sensitive information via a crafted certificate.",
+          "severity": "medium",
+          "cvss_score": 5.4,
+          "affected_versions": "",
+          "fixed_version": null,
+          "references": [
+            "http://www.kb.cert.org/vuls/id/582497",
+            "http://www.kb.cert.org/vuls/id/597897",
+            "https://docs.google.com/spreadsheets/d/1t5GXwjw82SyunALVJb2w0zi3FoLRIkfGPc7AMjRF0r4/edit?usp=sharing",
+            "http://www.kb.cert.org/vuls/id/582497",
+            "http://www.kb.cert.org/vuls/id/597897"
+          ],
+          "published": "2014-10-20",
+          "cwe_ids": [
+            "CWE-310"
+          ]
+        }
+      ],
+      "risk_score": 2.3,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "zipp",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "3.23.0",
+        "license": "Unknown",
+        "description": "Backport of pathlib-compatible object wrapper for zip files",
+        "is_outdated": false,
+        "depth": 2,
+        "children": []
+      },
+      "vulnerabilities": [
+        {
+          "id": "GHSA-jfmj-5v4g-7637",
+          "source": "OSV",
+          "summary": "zipp Denial of Service vulnerability",
+          "severity": "medium",
+          "cvss_score": 6.2,
+          "affected_versions": ">=0, <3.19.1",
+          "fixed_version": "3.19.1",
+          "references": [
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-5569",
+            "https://github.com/jaraco/zipp/commit/fd604bd34f0343472521a36da1fbd22e793e14fd",
+            "https://github.com/jaraco/zipp",
+            "https://huntr.com/bounties/be898306-11f9-46b4-b28c-f4c4aa4ffbae"
+          ],
+          "published": "2024-07-09T00:31:40Z",
+          "cwe_ids": [
+            "CWE-400",
+            "CWE-835"
+          ]
+        }
+      ],
+      "risk_score": 1.7,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "click",
+        "version": "8.1.3",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "8.3.1",
+        "license": "Unknown",
+        "description": "Composable command line interface toolkit",
+        "is_outdated": true,
+        "depth": 0,
+        "children": [
+          {
+            "name": "colorama",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "0.4.6",
+            "license": "BSD License",
+            "description": "Cross-platform colored terminal text.",
+            "is_outdated": false,
+            "depth": 1,
+            "children": []
+          }
+        ]
+      },
+      "vulnerabilities": [],
+      "risk_score": 1.1,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "flask",
+        "version": "2.3.2",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "3.1.3",
+        "license": "Unknown",
+        "description": "A simple framework for building complex web applications.",
+        "is_outdated": true,
+        "depth": 0,
+        "children": [
+          {
+            "name": "importlib-metadata",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "8.7.1",
+            "license": "Unknown",
+            "description": "Read metadata from Python packages",
+            "is_outdated": false,
+            "depth": 1,
+            "children": [
+              {
+                "name": "zipp",
+                "version": "",
+                "ecosystem": "PyPI",
+                "is_direct": false,
+                "latest_version": "3.23.0",
+                "license": "Unknown",
+                "description": "Backport of pathlib-compatible object wrapper for zip files",
+                "is_outdated": false,
+                "depth": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "werkzeug",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "3.1.6",
+            "license": "Unknown",
+            "description": "The comprehensive WSGI web application library.",
+            "is_outdated": false,
+            "depth": 1,
+            "children": []
+          }
+        ]
+      },
+      "vulnerabilities": [],
+      "risk_score": 1.1,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "prompt-toolkit",
+        "version": "3.0.36",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "3.0.52",
+        "license": "BSD License",
+        "description": "Library for building powerful interactive command lines in Python",
+        "is_outdated": true,
+        "depth": 1,
+        "children": [
+          {
+            "name": "wcwidth",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "0.6.0",
+            "license": "Unknown",
+            "description": "Measures the displayed width of unicode strings in a terminal",
+            "is_outdated": false,
+            "depth": 2,
+            "children": []
+          }
+        ]
+      },
+      "vulnerabilities": [],
+      "risk_score": 1.0,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "async-timeout",
+        "version": "4.0.2",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "5.0.1",
+        "license": "Apache 2",
+        "description": "Timeout context manager for asyncio programs",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "billiard",
+        "version": "3.6.4.0",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "4.2.4",
+        "license": "BSD",
+        "description": "Python multiprocessing fork with improvements and bugfixes",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "blinker",
+        "version": "1.6.2",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "1.9.0",
+        "license": "MIT License",
+        "description": "Fast, simple object-to-object and broadcast signaling",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "click-didyoumean",
+        "version": "0.3.0",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "0.3.1",
+        "license": "MIT",
+        "description": "Enables git-like *did-you-mean* feature in click",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "click-plugins",
+        "version": "1.1.1",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "1.1.1.2",
+        "license": "New BSD",
+        "description": "An extension module for click to enable registering CLI commands via setuptools entry-points.",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "click-repl",
+        "version": "0.2.0",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "0.3.0",
+        "license": "MIT",
+        "description": "REPL plugin for Click",
+        "is_outdated": true,
+        "depth": 0,
+        "children": [
+          {
+            "name": "prompt-toolkit",
+            "version": "3.0.36",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "3.0.52",
+            "license": "BSD License",
+            "description": "Library for building powerful interactive command lines in Python",
+            "is_outdated": true,
+            "depth": 1,
+            "children": [
+              {
+                "name": "wcwidth",
+                "version": "",
+                "ecosystem": "PyPI",
+                "is_direct": false,
+                "latest_version": "0.6.0",
+                "license": "Unknown",
+                "description": "Measures the displayed width of unicode strings in a terminal",
+                "is_outdated": false,
+                "depth": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "itsdangerous",
+        "version": "2.1.2",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "2.2.0",
+        "license": "BSD License",
+        "description": "Safely pass data to untrusted environments and back.",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "pytz",
+        "version": "2023.3",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "2025.2",
+        "license": "MIT",
+        "description": "World timezone definitions, modern and historical",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "redis",
+        "version": "4.5.4",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "7.2.0",
+        "license": "MIT License",
+        "description": "Python client for Redis database and key-value store",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "six",
+        "version": "1.16.0",
+        "ecosystem": "PyPI",
+        "is_direct": true,
+        "latest_version": "1.17.0",
+        "license": "MIT",
+        "description": "Python 2 and 3 compatibility utilities",
+        "is_outdated": true,
+        "depth": 0,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.8,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "typing-extensions",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "4.15.0",
+        "license": "Unknown",
+        "description": "Backported and Experimental Type Hints for Python 3.9+",
+        "is_outdated": false,
+        "depth": 2,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.6,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "wcwidth",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "0.6.0",
+        "license": "Unknown",
+        "description": "Measures the displayed width of unicode strings in a terminal",
+        "is_outdated": false,
+        "depth": 2,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.6,
+      "risk_level": "low"
+    },
+    {
+      "package": {
+        "name": "importlib-metadata",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "8.7.1",
+        "license": "Unknown",
+        "description": "Read metadata from Python packages",
+        "is_outdated": false,
+        "depth": 1,
+        "children": [
+          {
+            "name": "zipp",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "3.23.0",
+            "license": "Unknown",
+            "description": "Backport of pathlib-compatible object wrapper for zip files",
+            "is_outdated": false,
+            "depth": 2,
+            "children": []
+          }
+        ]
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.4,
+      "risk_level": "none"
+    },
+    {
+      "package": {
+        "name": "MarkupSafe",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "3.0.3",
+        "license": "Unknown",
+        "description": "Safely add untrusted strings to HTML/XML markup.",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.4,
+      "risk_level": "none"
+    },
+    {
+      "package": {
+        "name": "packaging",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "26.0",
+        "license": "Unknown",
+        "description": "Core utilities for Python packages",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.4,
+      "risk_level": "none"
+    },
+    {
+      "package": {
+        "name": "kombu",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "5.6.2",
+        "license": "BSD-3-Clause",
+        "description": "Messaging library for Python.",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.1,
+      "risk_level": "none"
+    },
+    {
+      "package": {
+        "name": "python-dateutil",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "2.9.0.post0",
+        "license": "Dual License",
+        "description": "Extensions to the standard Python datetime module",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.1,
+      "risk_level": "none"
+    },
+    {
+      "package": {
+        "name": "exceptiongroup",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "1.3.1",
+        "license": "MIT License",
+        "description": "Backport of PEP 654 (exception groups)",
+        "is_outdated": false,
+        "depth": 1,
+        "children": [
+          {
+            "name": "typing-extensions",
+            "version": "",
+            "ecosystem": "PyPI",
+            "is_direct": false,
+            "latest_version": "4.15.0",
+            "license": "Unknown",
+            "description": "Backported and Experimental Type Hints for Python 3.9+",
+            "is_outdated": false,
+            "depth": 2,
+            "children": []
+          }
+        ]
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.1,
+      "risk_level": "none"
+    },
+    {
+      "package": {
+        "name": "tzlocal",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "5.3.1",
+        "license": "MIT",
+        "description": "tzinfo object for the local timezone",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.1,
+      "risk_level": "none"
+    },
+    {
+      "package": {
+        "name": "colorama",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "0.4.6",
+        "license": "BSD License",
+        "description": "Cross-platform colored terminal text.",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.1,
+      "risk_level": "none"
+    },
+    {
+      "package": {
+        "name": "tzdata",
+        "version": "",
+        "ecosystem": "PyPI",
+        "is_direct": false,
+        "latest_version": "2025.3",
+        "license": "Apache-2.0",
+        "description": "Provider of IANA time zone data",
+        "is_outdated": false,
+        "depth": 1,
+        "children": []
+      },
+      "vulnerabilities": [],
+      "risk_score": 0.1,
+      "risk_level": "none"
+    }
+  ],
+  "dependency_tree": [
+    {
+      "name": "amqp",
+      "version": "5.1.1",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "5.3.1",
+      "license": "BSD",
+      "description": "Low-level AMQP client for Python (fork of amqplib).",
+      "is_outdated": true,
+      "depth": 0,
+      "children": [
+        {
+          "name": "vine",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "5.1.0",
+          "license": "BSD",
+          "description": "Python promises.",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "async-timeout",
+      "version": "4.0.2",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "5.0.1",
+      "license": "Apache 2",
+      "description": "Timeout context manager for asyncio programs",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "billiard",
+      "version": "3.6.4.0",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "4.2.4",
+      "license": "BSD",
+      "description": "Python multiprocessing fork with improvements and bugfixes",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "blinker",
+      "version": "1.6.2",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "1.9.0",
+      "license": "MIT License",
+      "description": "Fast, simple object-to-object and broadcast signaling",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "celery",
+      "version": "5.2.7",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "5.6.2",
+      "license": "BSD-3-Clause",
+      "description": "Distributed Task Queue.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": [
+        {
+          "name": "kombu",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "5.6.2",
+          "license": "BSD-3-Clause",
+          "description": "Messaging library for Python.",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        },
+        {
+          "name": "python-dateutil",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "2.9.0.post0",
+          "license": "Dual License",
+          "description": "Extensions to the standard Python datetime module",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        },
+        {
+          "name": "exceptiongroup",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "1.3.1",
+          "license": "MIT License",
+          "description": "Backport of PEP 654 (exception groups)",
+          "is_outdated": false,
+          "depth": 1,
+          "children": [
+            {
+              "name": "typing-extensions",
+              "version": "",
+              "ecosystem": "PyPI",
+              "is_direct": false,
+              "latest_version": "4.15.0",
+              "license": "Unknown",
+              "description": "Backported and Experimental Type Hints for Python 3.9+",
+              "is_outdated": false,
+              "depth": 2,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "tzlocal",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "5.3.1",
+          "license": "MIT",
+          "description": "tzinfo object for the local timezone",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "click",
+      "version": "8.1.3",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "8.3.1",
+      "license": "Unknown",
+      "description": "Composable command line interface toolkit",
+      "is_outdated": true,
+      "depth": 0,
+      "children": [
+        {
+          "name": "colorama",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "0.4.6",
+          "license": "BSD License",
+          "description": "Cross-platform colored terminal text.",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "click-didyoumean",
+      "version": "0.3.0",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "0.3.1",
+      "license": "MIT",
+      "description": "Enables git-like *did-you-mean* feature in click",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "click-plugins",
+      "version": "1.1.1",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "1.1.1.2",
+      "license": "New BSD",
+      "description": "An extension module for click to enable registering CLI commands via setuptools entry-points.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "click-repl",
+      "version": "0.2.0",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "0.3.0",
+      "license": "MIT",
+      "description": "REPL plugin for Click",
+      "is_outdated": true,
+      "depth": 0,
+      "children": [
+        {
+          "name": "prompt-toolkit",
+          "version": "3.0.36",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "3.0.52",
+          "license": "BSD License",
+          "description": "Library for building powerful interactive command lines in Python",
+          "is_outdated": true,
+          "depth": 1,
+          "children": [
+            {
+              "name": "wcwidth",
+              "version": "",
+              "ecosystem": "PyPI",
+              "is_direct": false,
+              "latest_version": "0.6.0",
+              "license": "Unknown",
+              "description": "Measures the displayed width of unicode strings in a terminal",
+              "is_outdated": false,
+              "depth": 2,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "flask",
+      "version": "2.3.2",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "3.1.3",
+      "license": "Unknown",
+      "description": "A simple framework for building complex web applications.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": [
+        {
+          "name": "importlib-metadata",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "8.7.1",
+          "license": "Unknown",
+          "description": "Read metadata from Python packages",
+          "is_outdated": false,
+          "depth": 1,
+          "children": [
+            {
+              "name": "zipp",
+              "version": "",
+              "ecosystem": "PyPI",
+              "is_direct": false,
+              "latest_version": "3.23.0",
+              "license": "Unknown",
+              "description": "Backport of pathlib-compatible object wrapper for zip files",
+              "is_outdated": false,
+              "depth": 2,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "werkzeug",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "3.1.6",
+          "license": "Unknown",
+          "description": "The comprehensive WSGI web application library.",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "itsdangerous",
+      "version": "2.1.2",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "2.2.0",
+      "license": "BSD License",
+      "description": "Safely pass data to untrusted environments and back.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.2",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "3.1.6",
+      "license": "BSD License",
+      "description": "A very fast and expressive template engine.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": [
+        {
+          "name": "MarkupSafe",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "3.0.3",
+          "license": "Unknown",
+          "description": "Safely add untrusted strings to HTML/XML markup.",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "kombu",
+      "version": "5.2.4",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "5.6.2",
+      "license": "BSD-3-Clause",
+      "description": "Messaging library for Python.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": [
+        {
+          "name": "tzdata",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "2025.3",
+          "license": "Apache-2.0",
+          "description": "Provider of IANA time zone data",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        },
+        {
+          "name": "packaging",
+          "version": "",
+          "ecosystem": "PyPI",
+          "is_direct": false,
+          "latest_version": "26.0",
+          "license": "Unknown",
+          "description": "Core utilities for Python packages",
+          "is_outdated": false,
+          "depth": 1,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "markupsafe",
+      "version": "2.1.2",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "3.0.3",
+      "license": "Unknown",
+      "description": "Safely add untrusted strings to HTML/XML markup.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "prompt-toolkit",
+      "version": "3.0.38",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "3.0.52",
+      "license": "BSD License",
+      "description": "Library for building powerful interactive command lines in Python",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "pytz",
+      "version": "2023.3",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "2025.2",
+      "license": "MIT",
+      "description": "World timezone definitions, modern and historical",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "redis",
+      "version": "4.5.4",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "7.2.0",
+      "license": "MIT License",
+      "description": "Python client for Redis database and key-value store",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "six",
+      "version": "1.16.0",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "1.17.0",
+      "license": "MIT",
+      "description": "Python 2 and 3 compatibility utilities",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "vine",
+      "version": "5.0.0",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "5.1.0",
+      "license": "BSD",
+      "description": "Python promises.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "wcwidth",
+      "version": "0.2.6",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "0.6.0",
+      "license": "Unknown",
+      "description": "Measures the displayed width of unicode strings in a terminal",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    },
+    {
+      "name": "werkzeug",
+      "version": "2.3.3",
+      "ecosystem": "PyPI",
+      "is_direct": true,
+      "latest_version": "3.1.6",
+      "license": "Unknown",
+      "description": "The comprehensive WSGI web application library.",
+      "is_outdated": true,
+      "depth": 0,
+      "children": []
+    }
+  ],
+  "generated_at": "2026-02-20 20:55:34 UTC"
+}

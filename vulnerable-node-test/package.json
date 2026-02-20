@@ -1,0 +1,10 @@
+{
+  "name": "vulnerable-node-test",
+  "version": "1.0.0",
+  "description": "Intentionally vulnerable Node.js project for dependency auditing tests",
+  "main": "index.js",
+  "dependencies": {
+    "lodash": "4.17.15",
+    "express": "4.16.0"
+  }
+}
